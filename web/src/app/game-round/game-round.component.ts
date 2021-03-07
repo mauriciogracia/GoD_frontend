@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GameService } from '../game.service';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-game-round',
@@ -16,6 +16,7 @@ export class GameRoundComponent implements OnInit {
   ngOnInit(): void {
     this.currentRound = this.gameService.getCurrentRound();
 
+    //if the game has not started return to the game-start
     if (this.currentRound > 0) {
       this.currentPlayer = this.gameService.getCurrentPlayerName();
     }
