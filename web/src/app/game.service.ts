@@ -24,4 +24,18 @@ export class GameService {
     
     console.warn(this.gameStatus);
   }
+  
+  getCurrentRound() {
+    return this.gameStatus?.currentRound || -1; 
+  }
+
+  getCurrentPlayerName() {
+    let cp: string = '';
+
+    if (this.gameStatus != null) {
+      cp = this.gameStatus.players[this.gameStatus.currentPlayer].name;
+    }
+
+    return cp;
+  }
 }

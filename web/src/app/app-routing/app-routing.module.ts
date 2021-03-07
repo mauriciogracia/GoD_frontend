@@ -6,8 +6,8 @@ import { GameStartComponent } from '../game-start/game-start.component';
 
 const routes: Routes = [
   {
-      path: '',
-      component: GameStartComponent,
+    path: '',
+    component: GameStartComponent,
   },
   {
     path: 'round',

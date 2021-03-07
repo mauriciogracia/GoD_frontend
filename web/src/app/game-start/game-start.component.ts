@@ -16,7 +16,7 @@ export class GameStartComponent implements OnInit {
     playerTwoName: new FormControl('', [Validators.required, this.WhitespacesInvalid]),
   });
 
-  constructor(private gameService: GameService) {  }
+  constructor(private gameService: GameService, private router:Router) {  }
 
   public WhitespacesInvalid(control: FormControl) {
     const isWhitespace = (control.value || '').trim().length === 0;
@@ -29,6 +29,7 @@ export class GameStartComponent implements OnInit {
 
   onSubmit() {
     this.gameService.start(this.playerInfo.value.playerOneName, this.playerInfo.value.playerTwoName);
+    this.router.navigateByUrl('/round');
   }
 
   
