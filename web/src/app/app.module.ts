@@ -11,6 +11,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { AppRoutingModule } from './app-routing/app-routing.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     BrowserModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
