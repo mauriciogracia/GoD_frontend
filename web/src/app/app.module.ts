@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { GameRoundComponent } from './game-round/game-round.component';
@@ -13,7 +13,7 @@ import { GameStartComponent } from './game-start/game-start.component';
     GameStartComponent
   ],
   imports: [
-    FormsModule,
+    ReactiveFormsModule,
     BrowserModule
   ],
   providers: [],

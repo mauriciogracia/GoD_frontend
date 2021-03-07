@@ -1,1 +1,18 @@
-<p>game-start works!</p>
+<h2>Welcome to Game of Drones</h2>
+<h2>Enter Player's Names</h2>
+
+
+<form [formGroup]="playerInfo" (ngSubmit)="onSubmit()">
+  
+    <label>
+      Player 1:
+      <input type="text" formControlName="playerOneName">
+    </label>
+  
+    <label>
+      Player 2:
+      <input type="text" formControlName="playerTwoName">
+    </label>
+  
+    <button type="submit" [disabled]="!playerInfo.valid">START</button>
+</form>
