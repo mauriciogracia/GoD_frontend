@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game-round.component.css']
 })
 export class GameRoundComponent implements OnInit {
-
+  gameStatus = {  }
   constructor() { }
 
   ngOnInit(): void {

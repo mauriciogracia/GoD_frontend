@@ -1,7 +1,11 @@
+import { player } from "./player";
+
 export class gameStatus {
 
     constructor(
-        public namePlayerOne: string,
-        public namePlayerTwo: string
+        public currentRound: number,
+        public maxRounds : number,
+        public currentPlayer: number,
+        public players : player[],
     ) { }
 }

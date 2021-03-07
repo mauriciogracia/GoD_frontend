@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-game-start',
@@ -14,7 +15,7 @@ export class GameStartComponent implements OnInit {
     playerTwoName: new FormControl('', [Validators.required, this.WhitespacesInvalid]),
   });
 
-  constructor() {  }
+  constructor(private gameService: GameService) {  }
 
   public WhitespacesInvalid(control: FormControl) {
     const isWhitespace = (control.value || '').trim().length === 0;
@@ -26,8 +27,8 @@ export class GameStartComponent implements OnInit {
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.playerInfo.value);
-    console.warn(this.playerInfo);
+    this.gameService.start(this.playerInfo.value.playerOneName, this.playerInfo.value.playerTwoName);
   }
+
+  
 }
