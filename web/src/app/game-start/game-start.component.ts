@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-game-start',

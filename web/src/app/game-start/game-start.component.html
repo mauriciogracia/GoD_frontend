@@ -1,26 +1,31 @@
-<h2>Welcome to Game of Drones</h2>
-<h2>Enter Player's Names</h2>
+<h2 class="full-width-centered">Welcome to Game of Drones</h2>
+<h2 class="full-width-centered">Enter Player's Names</h2>
 
-
-<form [formGroup]="playerInfo" (ngSubmit)="onSubmit()">
-  <label>
-    Player 1:
-    <input type="text" formControlName="playerOneName">
-  </label>
-
-  <label>
-    Player 2:
-    <input type="text" formControlName="playerTwoName">
-  </label>
-
-  <button type="submit" [disabled]="!playerInfo.valid">START</button>
-
-  <div *ngIf="playerInfo.controls['playerOneName'].hasError('whitespaceInvalid')" class="alert alert-danger">
+<div class="full-width-centered">
+  <form [formGroup]="playerInfo" (ngSubmit)="onSubmit()">
+    <div class="full-width" >
+      <mat-label>Player 1:&nbsp;&nbsp;&nbsp;&nbsp;</mat-label>
+      <input matInput formControlName="playerOneName">
+    </div>
+    <br>
+    <div>
+      <mat-label>Player 2:&nbsp;&nbsp;&nbsp;&nbsp;</mat-label>
+      <input matInput formControlName="playerTwoName">
+    </div>
+    <br>
+    <div>
+      <button type="submit" [disabled]="!playerInfo.valid">START</button>
+    </div>
+  </form>
+</div>
+<br>
+<div class="full-width-centered">
+  <mat-error *ngIf="playerInfo.controls['playerOneName'].hasError('whitespaceInvalid')">
     Player 1 name can not be empty.
-  </div>
-
-  <div *ngIf="playerInfo.controls['playerTwoName'].hasError('whitespaceInvalid')" class="alert alert-danger">
+  </mat-error>
+</div>
+<div class="full-width-centered">
+  <mat-error *ngIf="playerInfo.controls['playerTwoName'].hasError('whitespaceInvalid')">
     Player 2 name can not be empty.
-  </div>
-
-</form>
+  </mat-error>
+</div>
