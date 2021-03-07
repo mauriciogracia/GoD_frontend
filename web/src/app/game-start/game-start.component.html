@@ -3,16 +3,24 @@
 
 
 <form [formGroup]="playerInfo" (ngSubmit)="onSubmit()">
-  
-    <label>
-      Player 1:
-      <input type="text" formControlName="playerOneName">
-    </label>
-  
-    <label>
-      Player 2:
-      <input type="text" formControlName="playerTwoName">
-    </label>
-  
-    <button type="submit" [disabled]="!playerInfo.valid">START</button>
+  <label>
+    Player 1:
+    <input type="text" formControlName="playerOneName">
+  </label>
+
+  <label>
+    Player 2:
+    <input type="text" formControlName="playerTwoName">
+  </label>
+
+  <button type="submit" [disabled]="!playerInfo.valid">START</button>
+
+  <div *ngIf="playerInfo.controls['playerOneName'].hasError('whitespaceInvalid')" class="alert alert-danger">
+    Player 1 name can not be empty.
+  </div>
+
+  <div *ngIf="playerInfo.controls['playerTwoName'].hasError('whitespaceInvalid')" class="alert alert-danger">
+    Player 2 name can not be empty.
+  </div>
+
 </form>

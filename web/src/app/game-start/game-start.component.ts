@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-game-start',
@@ -9,11 +9,17 @@ import { FormGroup, FormControl } from '@angular/forms';
   
 export class GameStartComponent implements OnInit {
   playerInfo = new FormGroup({
-    playerOneName: new FormControl(''),
-    playerTwoName: new FormControl(''),
+    playerOneName: new FormControl('', [Validators.required, this.WhitespacesInvalid]),
+    playerTwoName: new FormControl('', [Validators.required, this.WhitespacesInvalid]),
   });
 
   constructor() {  }
+
+  public WhitespacesInvalid(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespaceInvalid': true };
+  }
 
   ngOnInit(): void {
   }
@@ -21,5 +27,6 @@ export class GameStartComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn(this.playerInfo.value);
+    console.warn(this.playerInfo);
   }
 }
