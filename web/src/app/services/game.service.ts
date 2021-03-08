@@ -14,6 +14,7 @@ export class GameService {
     playerOne: string,
     playerTwo: string
   ) {
+	//TODO - MGG - instead of hardcoding this move it to the backend or a local JSON file
     const p1 = new player(playerOne, 0);
     const p2 = new player(playerTwo, 0);
     const currentRound = 1;
