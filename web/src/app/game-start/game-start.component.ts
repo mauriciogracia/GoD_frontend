@@ -24,6 +24,13 @@ export class GameStartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //set defuault values for player names to speed up testing/startup
+    this.playerInfo.setValue(
+      {
+        playerOneName: 'Carlos',
+        playerTwoName: 'Maria',
+      }
+    );
   }
 
   onSubmit() {
