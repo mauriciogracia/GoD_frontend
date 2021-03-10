@@ -15,12 +15,6 @@ export class BackendService {
     this.httpOptions = {
       observe: 'body', 
       responseType: 'json',
-      /*
-      headers: new HttpHeaders({ 
-        'Access-Control-Allow-Origin':'*'
-      })
-      */
-      headers:{'Access-Control-Allow-Origin':'*'}
     };
   }
 

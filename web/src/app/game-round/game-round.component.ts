@@ -28,8 +28,6 @@ export class GameRoundComponent implements OnInit {
   
     ;
 
-    //this.moves = this.backService.getGameMoves() ;
-
     //if the game has not started return to the game-start
     if (this.currentRound > 0) {
       this.currentPlayer = this.gameService.getCurrentPlayerName();
