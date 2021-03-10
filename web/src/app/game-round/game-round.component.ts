@@ -35,6 +35,7 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
       this.moves = this.gameService.getGameMoves() ;
       console.log(`Game Moves:${this.moves}`);
 
+      //Set de default value
       this.currentRoundInfo.setValue({
         movesControl: 'rock' 
       });

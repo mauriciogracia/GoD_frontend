@@ -4,10 +4,16 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .full-width-centered {
-    width: 100%;
-    display: inline-block;
-    text-align: center;
-  }
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+ }
+
+.mat-select {
+    border: 1px solid lightseagreen !important ;
+    background: lightseagreen;
+    height: 30px !important;
+}
 
 table {
   width: 100%;

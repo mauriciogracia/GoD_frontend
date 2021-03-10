@@ -2,17 +2,25 @@
   <tr>
     <td class="fat">
       <div class="full-width-centered">
+       
+        
         <form [formGroup]="currentRoundInfo" (ngSubmit)="onSubmit()">
           <div>
               <h2 class="full-width-centered">Round {{currentRound}} - Player: {{currentPlayer}}</h2>
-              <mat-label >Select your move:</mat-label>
-              
-              <mat-select placeholder="selectedMove" [value]="selectedMove" formControlName="movesControl" (selectionChange)="moveSelected($event.value)">
-                <ng-container *ngFor="let m of moves">
-                  <mat-option [value]="m">{{m}}</mat-option>
-                </ng-container>
-              </mat-select>
-              {{selectedMove}}
+
+              <mat-grid-list cols="3" rowHeight="30px">
+                <mat-grid-tile>
+                  <mat-label >Select your move:</mat-label>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-select placeholder="selectedMove" [value]="selectedMove" formControlName="movesControl" (selectionChange)="moveSelected($event.value)">
+                    <ng-container *ngFor="let m of moves">
+                      <mat-option [value]="m">{{m}}</mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-grid-tile>
+              <mat-grid-tile>&nbsp;</mat-grid-tile>
+              </mat-grid-list>
           </div>
           <br>
           <div>

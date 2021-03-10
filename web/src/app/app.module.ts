@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list'; 
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,6 +33,7 @@ import { ShowWinerComponent } from './show-winer/show-winer.component';
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
+    MatGridListModule,
     MatSelectModule,
     MatFormFieldModule,
     AppRoutingModule,
