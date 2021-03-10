@@ -2,15 +2,25 @@ import { Inject,Injectable } from '@angular/core';
 import { GameStatus } from '../models/GameStatus';
 import { PlayerStats } from '../models/PlayerStats';
 import { RoundWiner } from '../models/RoundWiner';
+import { BackendService } from './backend.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
   private gameStatus: GameStatus | undefined;
+  private moves : string[] = [];
 
-  constructor() { }
-  
+  constructor(private backService: BackendService) {
+    this.initData() ;
+  }
+      private initData() {
+    //Handle error in API calls
+    this.backService.getGameMoves()
+    .subscribe((data: string[]) => {
+      this.moves = data;
+    });
+  }
   start(
     playerOne: string,
     playerTwo: string
@@ -27,6 +37,10 @@ export class GameService {
     console.warn(this.gameStatus);
   }
   
+  getGameMoves() {
+    return this.moves ;
+  }
+
   getCurrentRound() {
     return this.gameStatus?.currentRound || -1; 
   }

@@ -12,9 +12,8 @@ import { GameService } from '../services/game.service';
 export class GameRoundComponent implements OnInit { //}, AfterViewInit {
   currentRound : number = 0 ;
   currentPlayer: string = '';
-
-  moves : string[] = [];
   selectedMove: string = 'rock';
+  moves : string[] = [];
 
   errorMessage = undefined ;
 
@@ -23,8 +22,8 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
   });
   constructor(
     private gameService: GameService, 
-    private backService: BackendService,
-    private router:Router) { }
+    private router:Router
+    ) { }
 
   ngOnInit(): void {
     this.currentRound = this.gameService.getCurrentRound();
@@ -33,13 +32,9 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
     if (this.currentRound > 0) {
       this.currentPlayer = this.gameService.getCurrentPlayerName();
 
-      if(this.moves.length === 0) {
-        this.backService.getGameMoves()
-            .subscribe((data: string[]) => {
-              this.moves = data;
-              console.log(`getGameMoves:${this.moves}`);
-            });
-      }
+      this.moves = this.gameService.getGameMoves() ;
+      console.log(`Game Moves:${this.moves}`);
+
       this.currentRoundInfo.setValue({
         movesControl: 'rock' 
       });
@@ -59,5 +54,9 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
     //reloadoing for same URL is not woking even after configures in app-routing.module.ts
     //this.router.navigateByUrl('/round');
     this.ngOnInit() ;
+  }
+
+  getWiners() {
+    return this.gameService.getWiners() ;
   }
 }
