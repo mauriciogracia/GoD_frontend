@@ -14,10 +14,10 @@ export class GameRoundComponent implements OnInit {
   currentRound : number = 0 ;
   currentPlayer: string = '';
   moves : string[] = [];
-  selectedMove: string = 'Rock';
+  selectedMove: string = 'rock';
 
   currentRoundInfo = new FormGroup({
-    moves: new FormControl('', [Validators.required]),
+    movesControl: new FormControl('', [Validators.required]),
   });
   constructor(
     private gameService: GameService, 
@@ -33,14 +33,8 @@ export class GameRoundComponent implements OnInit {
       this.backService.getGameMoves()
           .subscribe((data: string[]) => {
             this.moves = data;
-            //this.currentRoundInfo.setValue({moves : data}) ;
             console.log(`getGameMoves:${this.moves}`);
           });
-
-      this.currentRoundInfo.setValue({
-        moves: 'Paper'
-      });
-
     }
     else {
       this.router.navigateByUrl('/');
