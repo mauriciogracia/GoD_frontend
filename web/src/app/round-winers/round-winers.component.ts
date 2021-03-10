@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RoundWiner } from '../models/RoundWiner';
-import { Inject,Injectable } from '@angular/core';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-round-winers',
@@ -8,10 +8,19 @@ import { Inject,Injectable } from '@angular/core';
   styleUrls: ['./round-winers.component.css']
 })
 export class RoundWinersComponent implements OnInit {
+  @Input() listWiners : RoundWiner[] = []
 
-  constructor() { }
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
   }
+
+  getWiners() {
+    return this.listWiners ;
+  }
+
+
 
 }

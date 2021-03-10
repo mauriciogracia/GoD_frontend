@@ -6,8 +6,9 @@
         <th>Winer</th>
     </thead>
     <tbody>
-        <tr *ngFor="let rw of winersList">
+        <tr *ngFor="let rw of getWiners()">
             <td>{{rw.round}}</td>
+            <td>{{rw.playerName}}</td>
         </tr>
     </tbody>
 </table>

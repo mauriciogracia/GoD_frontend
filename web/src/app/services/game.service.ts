@@ -1,6 +1,7 @@
 import { Inject,Injectable } from '@angular/core';
 import { GameStatus } from '../models/GameStatus';
 import { PlayerStats } from '../models/PlayerStats';
+import { RoundWiner } from '../models/RoundWiner';
 
 @Injectable({
   providedIn: 'root'
@@ -47,10 +48,17 @@ export class GameService {
       }
       else {
         this.gameStatus.currentMove.movePlayerTwo = move ;
+
+        //TODO: determin who won
+        this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, this.getCurrentPlayerName())) ;
         this.gameStatus.currentRound++ ;
       }
       this.gameStatus.currentPlayer = (this.gameStatus.currentPlayer+1)%2 ;
       console.log(this.gameStatus) ;
     }
+  }
+
+  getWiners() {
+    return this.gameStatus?.roundWiners || [] ;
   }
 }
