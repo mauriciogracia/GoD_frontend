@@ -2,9 +2,16 @@
 <h2 class="full-width-centered">Player: {{currentPlayer}}</h2>
 
 <div class="full-width-centered">
-  <form>
+  <form [formGroup]="currentRoundInfo" (ngSubmit)="onSubmit()">
     <div class="full-width" >
-      <mat-label>Select your move:</mat-label>
+      <mat-form-field floatLabel="never" appearance="outline">
+        <mat-label>Select your move:</mat-label>
+        <mat-select [(value)]="selectedMove" formControlName="moves" placeholder="test placeholder" (selectionChange)="moveSelected($event.value)">
+          <mat-option  *ngFor="let m of moves" [value]="m">
+            {{m}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <br>
     <div>
