@@ -14,12 +14,14 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RoundWinnersComponent } from './round-winners/round-winners.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameRoundComponent,
-    GameStartComponent
+    GameStartComponent,
+    RoundWinnersComponent
   ],
   imports: [
     ReactiveFormsModule,

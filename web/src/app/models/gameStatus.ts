@@ -1,15 +1,15 @@
-import { gameMove } from "./gameMove";
-import { playerStats } from "./playerStats";
+import { GameMove } from "./GameMove";
+import { PlayerStats } from "./PlayerStats";
 
-export class gameStatus {
-    public currentMove: gameMove ;
+export class GameStatus {
+    public currentMove: GameMove ;
 
     constructor(
         public currentRound: number,
         public maxWinningRounds : number,
         public currentPlayer: number,
-        public players : playerStats[],
+        public players : PlayerStats[],
     ) {
-        this.currentMove = new gameMove('','') ;
+        this.currentMove = new GameMove('','') ;
      }
 }

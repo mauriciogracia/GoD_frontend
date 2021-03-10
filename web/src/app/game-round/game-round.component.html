@@ -3,7 +3,7 @@
 
 <div class="full-width-centered">
   <form [formGroup]="currentRoundInfo" (ngSubmit)="onSubmit()">
-    <div class="full-width">
+    <div>
         <mat-label >Select your move:</mat-label>
         
         <mat-select placeholder="selectedMove" [value]="selectedMove" formControlName="movesControl" (selectionChange)="moveSelected($event.value)">
@@ -21,8 +21,8 @@
 </div>
 <br>
 
-<div class="full-width-centered">
-  <mat-error>
+<div class="full-width-centered" *ngIf>
+  <mat-error *ngIf="this.errorMessage">
     API server error (add ng-if and flag)
   </mat-error>
 </div>

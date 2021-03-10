@@ -1,4 +1,4 @@
-export class gameMove {
+export class GameMove {
 
     constructor(
         public movePlayerOne: string,

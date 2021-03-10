@@ -1,13 +1,12 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Inject,Injectable } from '@angular/core';
-import { gameStatus } from '../models/gameStatus';
-import { playerStats } from '../models/playerStats';
+import { GameStatus } from '../models/GameStatus';
+import { PlayerStats } from '../models/PlayerStats';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  gameStatus: gameStatus | undefined;
+  private gameStatus: GameStatus | undefined;
 
   constructor() { }
   
@@ -16,13 +15,13 @@ export class GameService {
     playerTwo: string
   ) {
 	//TODO - MGG - instead of hardcoding this move it to the backend or a local JSON file
-    const p1 = new playerStats(playerOne, 0);
-    const p2 = new playerStats(playerTwo, 0);
+    const p1 = new PlayerStats(playerOne, 0);
+    const p2 = new PlayerStats(playerTwo, 0);
     const currentRound = 1;
     const maxRounds = 3;
     const currentPlayer = 0;
 
-    this.gameStatus = new gameStatus(currentRound, maxRounds, currentPlayer, [p1, p2]);
+    this.gameStatus = new GameStatus(currentRound, maxRounds, currentPlayer, [p1, p2]);
     
     console.warn(this.gameStatus);
   }

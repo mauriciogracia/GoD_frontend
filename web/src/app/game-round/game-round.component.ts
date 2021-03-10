@@ -1,5 +1,4 @@
-import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendService } from '../services/backend.service';
@@ -13,8 +12,11 @@ import { GameService } from '../services/game.service';
 export class GameRoundComponent implements OnInit { //}, AfterViewInit {
   currentRound : number = 0 ;
   currentPlayer: string = '';
+
   moves : string[] = [];
   selectedMove: string = 'rock';
+
+  errorMessage = undefined ;
 
   currentRoundInfo = new FormGroup({
     movesControl: new FormControl('', [Validators.required]),
@@ -26,14 +28,18 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
 
   ngOnInit(): void {
     this.currentRound = this.gameService.getCurrentRound();
+
     //if the game has not started return to the game-start
     if (this.currentRound > 0) {
       this.currentPlayer = this.gameService.getCurrentPlayerName();
-      this.backService.getGameMoves()
-          .subscribe((data: string[]) => {
-            this.moves = data;
-            console.log(`getGameMoves:${this.moves}`);
-          });
+
+      if(this.moves.length === 0) {
+        this.backService.getGameMoves()
+            .subscribe((data: string[]) => {
+              this.moves = data;
+              console.log(`getGameMoves:${this.moves}`);
+            });
+      }
       this.currentRoundInfo.setValue({
         movesControl: 'rock' 
       });
@@ -43,16 +49,11 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
     }
   }
 
-  /*
-  ngAfterViewInit() {
-    
-    this.currentPlayer = this.gameService.getCurrentPlayerName();
-  }*/
-
   moveSelected(move: string) {
     this.selectedMove = move ;
   }
 
+  //NEXT button
   onSubmit() {
     this.gameService.nextMove(this.selectedMove) ;
     //reloadoing for same URL is not woking even after configures in app-routing.module.ts

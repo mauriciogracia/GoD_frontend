@@ -1,4 +1,4 @@
-export class playerStats{
+export class PlayerStats{
 
     constructor(
         public name: string,
