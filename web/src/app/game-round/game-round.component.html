@@ -1,30 +1,34 @@
-<h2 class="full-width-centered">Round {{currentRound}}</h2>
-<h2 class="full-width-centered">Player: {{currentPlayer}}</h2>
-
-<div class="full-width-centered">
-  <form [formGroup]="currentRoundInfo" (ngSubmit)="onSubmit()">
-    <div>
-        <mat-label >Select your move:</mat-label>
-        
-        <mat-select placeholder="selectedMove" [value]="selectedMove" formControlName="movesControl" (selectionChange)="moveSelected($event.value)">
-          <ng-container *ngFor="let m of moves">
-            <mat-option [value]="m">{{m}}</mat-option>
-          </ng-container>
-        </mat-select>
-        {{selectedMove}}
-    </div>
-    <br>
-    <div>
-      <button type="submit">NEXT</button>
-    </div>
-  </form>
-</div>
-<br>
-
-<div class="full-width-centered" *ngIf>
-  <mat-error *ngIf="this.errorMessage">
-    Error : {{this.errorMessage}}
-  </mat-error>
-</div>
-
-<app-round-winers [listWiners]="this.getWiners()"></app-round-winers>
+<table>
+  <tr>
+    <td class="fat">
+      <div class="full-width-centered">
+        <form [formGroup]="currentRoundInfo" (ngSubmit)="onSubmit()">
+          <div>
+              <h2 class="full-width-centered">Round {{currentRound}} - Player: {{currentPlayer}}</h2>
+              <mat-label >Select your move:</mat-label>
+              
+              <mat-select placeholder="selectedMove" [value]="selectedMove" formControlName="movesControl" (selectionChange)="moveSelected($event.value)">
+                <ng-container *ngFor="let m of moves">
+                  <mat-option [value]="m">{{m}}</mat-option>
+                </ng-container>
+              </mat-select>
+              {{selectedMove}}
+          </div>
+          <br>
+          <div>
+            <button type="submit">NEXT</button>
+          </div>
+        </form>
+        <br>
+        <div class="full-width-centered" *ngIf>
+          <mat-error *ngIf="this.errorMessage">
+            Error : {{this.errorMessage}}
+          </mat-error>
+        </div>
+      </div>
+    </td>
+    <td class="slim">
+      <app-round-winers [listWiners]="this.getWiners()"></app-round-winers>
+    </td>
+  </tr>
+</table>

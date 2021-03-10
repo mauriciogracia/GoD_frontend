@@ -1,14 +1,13 @@
 <h2 class="full-width-centered">Round Winers</h2>
-
-<table>
-    <thead>
-        <th>Round</th>
-        <th>Winer</th>
+<table class="thinBorder fat" >
+    <thead >
+        <th class="thinBorder">Round</th>
+        <th class="thinBorder">Winer</th>
     </thead>
     <tbody>
         <tr *ngFor="let rw of getWiners()">
-            <td>{{rw.round}}</td>
-            <td>{{rw.playerName}}</td>
+            <td class="thinBorder">{{rw.round}}</td>
+            <td class="thinBorder">{{rw.playerName}}</td>
         </tr>
     </tbody>
 </table>

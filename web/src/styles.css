@@ -8,8 +8,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: inline-block;
     text-align: center;
   }
-  
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.half {
+  width: 10%
+}
+
+.fat {
+  width: 75%
+}
+
+.slim {
+  width: 25%
+}
+
+.thinBorder {
+  border: 1px solid lightseagreen !important ;
+}
 .debug {
-  border: 2px;
-  color: red;
+  border: 2px solid red ;
 }
