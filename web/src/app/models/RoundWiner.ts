@@ -1,4 +1,5 @@
-export class RoundWinner{
+
+export class RoundWiner{
 
     constructor(
         public round: number,

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoundWinnersComponent } from './round-winners.component';
+import { ShowWinerComponent } from './show-winer.component';
 
-describe('RoundWinnersComponent', () => {
-  let component: RoundWinnersComponent;
-  let fixture: ComponentFixture<RoundWinnersComponent>;
+describe('ShowWinerComponent', () => {
+  let component: ShowWinerComponent;
+  let fixture: ComponentFixture<ShowWinerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RoundWinnersComponent ]
+      declarations: [ ShowWinerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RoundWinnersComponent);
+    fixture = TestBed.createComponent(ShowWinerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

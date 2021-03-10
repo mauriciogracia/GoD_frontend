@@ -34,7 +34,6 @@ export class GameService {
     let cp: string = '';
 
     if (this.gameStatus != null) {
-      console.log("currentPlayer:" + this.gameStatus.currentPlayer) ;
       cp = this.gameStatus.players[this.gameStatus.currentPlayer].name;
     }
 

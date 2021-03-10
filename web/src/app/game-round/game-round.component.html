@@ -23,6 +23,8 @@
 
 <div class="full-width-centered" *ngIf>
   <mat-error *ngIf="this.errorMessage">
-    API server error (add ng-if and flag)
+    Error : {{this.errorMessage}}
   </mat-error>
 </div>
+
+<app-round-winers></app-round-winers>
