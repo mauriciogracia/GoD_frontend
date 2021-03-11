@@ -56,7 +56,6 @@ export class GameService {
   }
 
   private initGameMoves() {
-    //TODO: Handle error in API calls
     this.backService.getGameMoves()
     .subscribe(
       (data: string[]) => {this.moves = data;},
