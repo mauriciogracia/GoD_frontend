@@ -4,8 +4,9 @@
       <div class="full-width-centered">
         <form [formGroup]="currentRoundInfo" (ngSubmit)="onSubmit()">
           <div>
-              <h2 class="full-width-centered">Round {{currentRound}} - Player: {{currentPlayer}}</h2>
-
+              <h2 class="full-width-centered">Round {{currentRound}}</h2>
+              <img src="assets/Symbols_02.jpg">
+              <h2 class="full-width-centered">Player: {{currentPlayer}}</h2>
               <mat-grid-list cols="3" rowHeight="30px">
                 <mat-grid-tile>
                   <mat-label >Select your move:</mat-label>
