@@ -18,6 +18,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RoundWinersComponent } from './round-winers/round-winers.component';
 import { ShowWinerComponent } from './show-winer/show-winer.component';
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfigService } from './services/app-config.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,19 @@ import { ShowWinerComponent } from './show-winer/show-winer.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [AppConfigService],
+      useFactory: (appConfigService: AppConfigService) => {
+        return () => {
+          //Make sure to return a promise!
+          return appConfigService.loadAppConfig();
+        };
+      }
+    }
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

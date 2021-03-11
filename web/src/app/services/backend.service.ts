@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { config, Observable } from 'rxjs';
 import { GameMove } from '../models/GameMove';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class BackendService {
-  private readonly getMovesURL = 'http://localhost:5000/api/Game/GetPossibleMoves';
+  private readonly getMovesURL =  this.configService.apiBaseUrl + '/GetPossibleMoves';
+  private readonly determineWinerURL =  this.configService.apiBaseUrl + '/DetermineResult';
 
-  private readonly determineWinerURL =  'http://localhost:5000/api/Game/DetermineResult';
   private httpOptions: any;
   
-  constructor(private http: HttpClient) { 
+  constructor(
+      private configService:AppConfigService, 
+      private http: HttpClient) 
+     { 
     this.httpOptions = {
       observe: 'body', 
       responseType: 'json',

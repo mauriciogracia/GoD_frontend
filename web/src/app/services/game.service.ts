@@ -96,6 +96,7 @@ export class GameService {
           this.gameStatus.roundWiners.push(rw) ;
 
           this.gameStatus.currentRound++ ;
+          //TODO use evenEmitters instead of this high coupled code 
           gr.nextStep(this.isThereWiner()) ;
 
         },
