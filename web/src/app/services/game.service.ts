@@ -83,10 +83,12 @@ export class GameService {
           let text : string;
           
           if(res == 1) {
-           text = this.getPlayerName(0) ;
+            text = this.getPlayerName(0) ;
+            this.updateGameWins(text) ;
           }
           else if(res == -1) {
             text = this.getPlayerName(1) ;
+            this.updateGameWins(text) ;
           }
           else {
             text = "-- TIE --";
@@ -109,11 +111,7 @@ export class GameService {
   isThereWiner() {
     let winner: boolean ;
 
-    this.gameStatus.roundWiners.sort((a,b) => a.round - b.round);
-
-    console.log(this.gameStatus.roundWiners) ;
-
-    winner = false ;
+    winner = (this.gameStatus.players.find(p => p.gamesWon == this.gameStatus.maxGameRounds) != undefined) ;
 
     return winner ; 
   }
@@ -126,6 +124,14 @@ export class GameService {
 
   addPlayer(playerName: string){
     this.gameStatus.players.push(new PlayerStats(playerName, 0));
+  }
+
+  updateGameWins(playerName: string) {
+    let found = this.gameStatus.players.find(p => p.name === playerName)
+
+    if(found != undefined) {
+      found.gamesWon++ ;
+    }
   }
 
   nextPlayer() {

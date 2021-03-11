@@ -8,6 +8,7 @@ export class GameStatus {
     public currentRound: number = 1;
     public currentPlayer: number = 0;
     public players : PlayerStats[] = [];
+    public maxGameRounds : number = 3 ;
 
     constructor(
     ) {
@@ -20,6 +21,7 @@ export class GameStatus {
         this.currentRound = 1;
         this.currentPlayer = 0;
         this.players  = []; 
+        this.maxGameRounds = 3 ;
      }
 
 

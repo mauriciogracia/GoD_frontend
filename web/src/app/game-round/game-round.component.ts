@@ -11,7 +11,7 @@ import { GameService } from '../services/game.service';
 export class GameRoundComponent implements OnInit { //}, AfterViewInit {
   currentRound : number = 0 ;
   currentPlayer: string = '';
-  selectedMove: string = 'rock';
+  selectedMove: string = '';
   moves : string[] = [];
 
   errorMessage = undefined ;
@@ -34,10 +34,6 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
       this.moves = this.gameService.getGameMoves() ;
       console.log(`Game Moves: ${this.moves}`);
 
-      //Set de default value
-      this.currentRoundInfo.setValue({
-        movesControl: 'rock' 
-      });
     }
     else {
       this.router.navigateByUrl('/');

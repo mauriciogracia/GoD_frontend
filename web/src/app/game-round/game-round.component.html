@@ -11,7 +11,7 @@
                   <mat-label >Select your move:</mat-label>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                  <mat-select placeholder="selectedMove" [value]="selectedMove" formControlName="movesControl" (selectionChange)="moveSelected($event.value)">
+                  <mat-select placeholder="select..." [value]="selectedMove" formControlName="movesControl" (selectionChange)="moveSelected($event.value)">
                     <ng-container *ngFor="let m of moves">
                       <mat-option [value]="m">{{m}}</mat-option>
                     </ng-container>
