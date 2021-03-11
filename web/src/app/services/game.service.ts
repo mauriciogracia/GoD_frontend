@@ -1,4 +1,5 @@
 import { Inject,Injectable } from '@angular/core';
+import { GameRoundComponent } from '../game-round/game-round.component';
 import { GameStatus } from '../models/GameStatus';
 import { PlayerStats } from '../models/PlayerStats';
 import { RoundWiner } from '../models/RoundWiner';
@@ -8,31 +9,20 @@ import { BackendService } from './backend.service';
   providedIn: 'root'
 })
 export class GameService {
-  private gameStatus: GameStatus | undefined;
+  private gameStatus: GameStatus = new GameStatus() ;
   private moves : string[] = [];
 
   constructor(private backService: BackendService) {
-    this.initData() ;
+    this.initGameMoves() ;
   }
-      private initData() {
-    //Handle error in API calls
-    this.backService.getGameMoves()
-    .subscribe((data: string[]) => {
-      this.moves = data;
-    });
-  }
+  
   start(
     playerOne: string,
     playerTwo: string
   ) {
-	//TODO - MGG - instead of hardcoding this move it to the backend or a local JSON file
-    const p1 = new PlayerStats(playerOne, 0);
-    const p2 = new PlayerStats(playerTwo, 0);
-    const currentRound = 1;
-    const maxRounds = 3;
-    const currentPlayer = 0;
-
-    this.gameStatus = new GameStatus(currentRound, maxRounds, currentPlayer, [p1, p2]);
+	
+    this.addPlayer(playerOne);
+    this.addPlayer(playerTwo);
     
     console.warn(this.gameStatus);
   }
@@ -42,37 +32,111 @@ export class GameService {
   }
 
   getCurrentRound() {
-    return this.gameStatus?.currentRound || -1; 
+    return this.gameStatus.currentRound ; 
   }
 
   getCurrentPlayerName() {
     let cp: string = '';
 
-    if (this.gameStatus != null) {
+    if (this.hasPlayers()) {
       cp = this.gameStatus.players[this.gameStatus.currentPlayer].name;
     }
 
     return cp;
   }
 
-  nextMove(move: string) {
-    if (this.gameStatus != null) {
-      if(this.gameStatus.currentPlayer == 0){
-        this.gameStatus.currentMove.movePlayerOne = move ;
-      }
-      else {
-        this.gameStatus.currentMove.movePlayerTwo = move ;
+  getPlayerName(index:number) {
+    let pName: string = '';
 
-        //TODO: determin who won
-        this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, this.getCurrentPlayerName())) ;
-        this.gameStatus.currentRound++ ;
-      }
-      this.gameStatus.currentPlayer = (this.gameStatus.currentPlayer+1)%2 ;
-      console.log(this.gameStatus) ;
+    if (this.hasPlayers()) {
+      pName = this.gameStatus.players[index].name;
     }
+
+    return pName;
+  }
+
+  private initGameMoves() {
+    //TODO: Handle error in API calls
+    this.backService.getGameMoves()
+    .subscribe((data: string[]) => {
+      this.moves = data;
+    });
+  }
+
+  nextMove(move: string,  gr:GameRoundComponent) {
+    console.log('nextMove:', move)
+
+    if(this.gameStatus.currentPlayer == 0){
+      this.gameStatus.currentMove.movePlayerOne = move ;
+      this.nextPlayer() ;
+      gr.ngOnInit();
+    }
+    else {
+      this.gameStatus.currentMove.movePlayerTwo = move ;
+
+      //Determine who won -- when this is enabled, the name of player is not being refreshed correctly 
+      
+      this.backService.determineWiner(this.gameStatus.currentMove)
+      .subscribe(
+        res => {
+          console.log('HTTP response', res)
+
+          if(res == 1) {
+            this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(0))) ;
+          }
+          else if(res == -1) {
+            this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(1))) ;
+          }
+          else {
+            this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, "-- TIE --")) ;
+          }
+          
+          this.gameStatus.currentRound++ ;
+          this.nextPlayer() ;
+          gr.ngOnInit();
+          
+        },
+        err => console.log('HTTP determineWiner Error', err),
+        () => console.log('HTTP request completed.')
+        );
+        
+       /* prev code
+        this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(1))) ;
+      
+      this.gameStatus.currentRound++ ;
+      this.nextPlayer() ;
+        */
+      
+    }
+    console.log(this.gameStatus) ;
+  }
+
+  hasPlayers() {
+    let has = (this.gameStatus.players.length > 0) ;
+
+    console.log("hasPlayers:" + has) ;
+
+    return has ;
+  }
+
+  addPlayer(playerName: string){
+    this.gameStatus.players.push(new PlayerStats(playerName, 0));
+  }
+
+  nextPlayer() {
+    let cp: string = '';
+
+    if (this.hasPlayers()) {
+      this.gameStatus.currentPlayer = (this.gameStatus.currentPlayer+1)%this.gameStatus.players.length ;
+      cp = this.getCurrentPlayerName();
+    }
+    return cp ;
   }
 
   getWiners() {
-    return this.gameStatus?.roundWiners || [] ;
+    return this.gameStatus.roundWiners || [] ;
   }
+
+
+
 }

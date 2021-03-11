@@ -3,16 +3,16 @@ import { PlayerStats } from "./PlayerStats";
 import { RoundWiner } from "./RoundWiner";
 
 export class GameStatus {
-    public currentMove: GameMove ;
-    public roundWiners: RoundWiner[] ;
+    public currentMove: GameMove = new GameMove('','');
+    public roundWiners: RoundWiner[] = [];
+    public currentRound: number = 1;
+    public maxWinningRounds : number = 3;
+    public currentPlayer: number = 0;
+    public players : PlayerStats[] = [];
 
     constructor(
-        public currentRound: number,
-        public maxWinningRounds : number,
-        public currentPlayer: number,
-        public players : PlayerStats[],
     ) {
-        this.currentMove = new GameMove('','') ;
-        this.roundWiners = [];
      }
+
+
 }

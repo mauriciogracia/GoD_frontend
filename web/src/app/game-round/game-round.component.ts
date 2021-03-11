@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BackendService } from '../services/backend.service';
 import { GameService } from '../services/game.service';
 
 @Component({
@@ -29,11 +28,12 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
     this.currentRound = this.gameService.getCurrentRound();
 
     //if the game has not started return to the game-start
-    if (this.currentRound > 0) {
+    if (this.gameService.hasPlayers()) {
       this.currentPlayer = this.gameService.getCurrentPlayerName();
+     
 
       this.moves = this.gameService.getGameMoves() ;
-      console.log(`Game Moves:${this.moves}`);
+      console.log(`Game Moves: ${this.moves}`);
 
       //Set de default value
       this.currentRoundInfo.setValue({
@@ -51,10 +51,7 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
 
   //NEXT button
   onSubmit() {
-    this.gameService.nextMove(this.selectedMove) ;
-    //reloadoing for same URL is not woking even after configures in app-routing.module.ts
-    //this.router.navigateByUrl('/round');
-    this.ngOnInit() ;
+    this.gameService.nextMove(this.selectedMove,this) ;
   }
 
   getWiners() {
