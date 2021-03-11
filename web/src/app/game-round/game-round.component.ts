@@ -59,8 +59,8 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
     return this.gameService.getWiners() ;
   }
 
-  nextStep(isThereWinner: boolean) {
-    if(isThereWinner)
+  nextStep(isThereWiner: boolean) {
+    if(isThereWiner)
     {
       this.router.navigateByUrl('/winer');
     }
