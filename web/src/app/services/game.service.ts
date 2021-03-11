@@ -79,7 +79,7 @@ export class GameService {
       this.backService.determineWiner(this.gameStatus.currentMove)
       .subscribe(
         res => {
-          console.log('HTTP response', res)
+          //console.log('HTTP response', res)
 
           if(res == 1) {
             this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(0))) ;
@@ -94,7 +94,6 @@ export class GameService {
           this.gameStatus.currentRound++ ;
           this.nextPlayer() ;
           gr.ngOnInit();
-          
         },
         err => console.log('HTTP determineWiner Error', err),
         () => console.log('HTTP request completed.')
