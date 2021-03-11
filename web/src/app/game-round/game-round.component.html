@@ -22,7 +22,7 @@
           </div>
           <br>
           <div>
-            <button mat-raised-button color="primary">NEXT</button>
+            <button mat-raised-button color="primary" [disabled]="this.selectedMove.length == 0">NEXT</button>
           </div>
         </form>
         <br>
