@@ -20,7 +20,7 @@ export class GameService {
     playerOne: string,
     playerTwo: string
   ) {
-	
+    this.gameStatus.init();
     this.addPlayer(playerOne);
     this.addPlayer(playerTwo);
     
@@ -58,9 +58,11 @@ export class GameService {
   private initGameMoves() {
     //TODO: Handle error in API calls
     this.backService.getGameMoves()
-    .subscribe((data: string[]) => {
-      this.moves = data;
-    });
+    .subscribe(
+      (data: string[]) => {this.moves = data;},
+      err => console.log('HTTP getGameMoves error:', err),
+      //() => console.log('HTTP request completed.')
+      );
   }
 
   nextMove(move: string,  gr:GameRoundComponent) {
@@ -78,34 +80,46 @@ export class GameService {
       this.backService.determineWiner(this.gameStatus.currentMove)
       .subscribe(
         res => {
-          let rw : RoundWiner;
-
+          let text : string;
+          
           if(res == 1) {
-            rw = new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(0)) ;
+           text = this.getPlayerName(0) ;
           }
           else if(res == -1) {
-            rw = new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(1)) ;
+            text = this.getPlayerName(1) ;
           }
           else {
-            rw = new RoundWiner(this.gameStatus.currentRound, "-- TIE --") ;
+            text = "-- TIE --";
           }
-          
+          let rw = new RoundWiner(this.gameStatus.currentRound, text) ;
           this.gameStatus.roundWiners.push(rw) ;
 
           this.gameStatus.currentRound++ ;
-          gr.nextStep(true) ;
+          gr.nextStep(this.isThereWiner()) ;
+
         },
-        err => console.log('HTTP determineWiner Error', err),
-        () => console.log('HTTP request completed.')
+        err => console.log('HTTP determineWiner error:', err),
+        //() => console.log('HTTP request completed.')
+
         );
     }
     console.log(this.gameStatus) ;
   }
+  
+  isThereWiner() {
+    let winner: boolean ;
 
+    this.gameStatus.roundWiners.sort((a,b) => a.round - b.round);
+
+    console.log(this.gameStatus.roundWiners) ;
+
+    winner = false ;
+
+    return winner ; 
+  }
+  
   hasPlayers() {
     let has = (this.gameStatus.players.length > 0) ;
-
-    console.log("hasPlayers:" + has) ;
 
     return has ;
   }

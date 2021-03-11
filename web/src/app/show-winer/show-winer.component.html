@@ -1,1 +1,5 @@
-<p>show-winer works!</p>
+<div class="full-width-centered">
+    <h2>WINNER IS [WINER]</h2>
+    <button mat-raised-button color="primary" (click)="playAgain()" >PLAY AGAIN</button>
+    <app-round-winers [listWiners]="this.getWiners()"></app-round-winers>
+</div>

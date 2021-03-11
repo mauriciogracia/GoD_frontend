@@ -25,10 +25,9 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
     ) { }
 
   ngOnInit(): void {
-    this.currentRound = this.gameService.getCurrentRound();
-
     //if the game has not started return to the game-start
     if (this.gameService.hasPlayers()) {
+      this.currentRound = this.gameService.getCurrentRound();
       this.currentPlayer = this.gameService.getCurrentPlayerName();
      
 
