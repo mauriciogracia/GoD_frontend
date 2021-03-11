@@ -45,6 +45,7 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
     }
   }
 
+  //change in the select/combo
   moveSelected(move: string) {
     this.selectedMove = move ;
   }
@@ -56,5 +57,16 @@ export class GameRoundComponent implements OnInit { //}, AfterViewInit {
 
   getWiners() {
     return this.gameService.getWiners() ;
+  }
+
+  nextStep(isThereWinner: boolean) {
+    if(isThereWinner)
+    {
+      this.router.navigateByUrl('/winer');
+    }
+    else {
+      this.gameService.nextPlayer() ;
+      this.ngOnInit();
+    }
   }
 }

@@ -68,44 +68,36 @@ export class GameService {
 
     if(this.gameStatus.currentPlayer == 0){
       this.gameStatus.currentMove.movePlayerOne = move ;
-      this.nextPlayer() ;
-      gr.ngOnInit();
+      gr.nextStep(false) ;
     }
     else {
       this.gameStatus.currentMove.movePlayerTwo = move ;
 
-      //Determine who won -- when this is enabled, the name of player is not being refreshed correctly 
+      //Determine who won 
       
       this.backService.determineWiner(this.gameStatus.currentMove)
       .subscribe(
         res => {
-          //console.log('HTTP response', res)
+          let rw : RoundWiner;
 
           if(res == 1) {
-            this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(0))) ;
+            rw = new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(0)) ;
           }
           else if(res == -1) {
-            this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(1))) ;
+            rw = new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(1)) ;
           }
           else {
-            this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, "-- TIE --")) ;
+            rw = new RoundWiner(this.gameStatus.currentRound, "-- TIE --") ;
           }
           
+          this.gameStatus.roundWiners.push(rw) ;
+
           this.gameStatus.currentRound++ ;
-          this.nextPlayer() ;
-          gr.ngOnInit();
+          gr.nextStep(true) ;
         },
         err => console.log('HTTP determineWiner Error', err),
         () => console.log('HTTP request completed.')
         );
-        
-       /* prev code
-        this.gameStatus.roundWiners.push(new RoundWiner(this.gameStatus.currentRound, this.getPlayerName(1))) ;
-      
-      this.gameStatus.currentRound++ ;
-      this.nextPlayer() ;
-        */
-      
     }
     console.log(this.gameStatus) ;
   }
