@@ -25,6 +25,14 @@ export class ShowWinerComponent implements OnInit {
 
   }
 
+  getWinerName() {
+    let name ;
+
+    name = this.gameService.getWiner()?.name || '' ;
+
+    return name  ;
+  }
+
   getWiners() {
     return this.gameService.getWiners() ;
   }

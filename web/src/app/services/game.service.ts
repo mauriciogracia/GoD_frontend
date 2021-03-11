@@ -9,6 +9,7 @@ import { BackendService } from './backend.service';
   providedIn: 'root'
 })
 export class GameService {
+
   private gameStatus: GameStatus = new GameStatus() ;
   private moves : string[] = [];
 
@@ -111,11 +112,19 @@ export class GameService {
   isThereWiner() {
     let winner: boolean ;
 
-    winner = (this.gameStatus.players.find(p => p.gamesWon == this.gameStatus.maxGameRounds) != undefined) ;
+    winner = (this.getWiner() != undefined) ;
 
     return winner ; 
   }
   
+  getWiner():PlayerStats | undefined{
+    let winner: PlayerStats | undefined ;
+
+    winner = this.gameStatus.players.find(p => p.gamesWon == this.gameStatus.maxGameRounds) ;
+
+    return winner 
+  }
+
   hasPlayers() {
     let has = (this.gameStatus.players.length > 0) ;
 
